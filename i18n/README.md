@@ -8,6 +8,7 @@ The [original English version](http://jpapa.me/ngstyles) is the source of truth,
   1. [German](de-DE.md) by [Michael Seeger](https://github.com/miseeger), [Sascha Hagedorn](https://github.com/saesh) and [Johannes Weber](https://github.com/johannes-weber)
   1. [Italian](it-IT.md) by [Angelo Chiello](https://github.com/angelochiello)
   1. [Japanese](ja-JP.md) by [@noritamago](https://github.com/noritamago)
+  2. [Korean](ko-KR.md) by [@justinyoo](https://github.com/justinyoo)
   1. [Macedonian](mk-MK.md) by [Aleksandar Bogatinov](https://github.com/Bogatinov)
   1. [Portuguese-Brazil](PT-BR.md) by [Vinicius Sabadim Fernandes](https://github.com/vinicius-sabadim)
   1. [Russian](ru-RU.md) by [Vasiliy Mazhekin](https://github.com/mazhekin)

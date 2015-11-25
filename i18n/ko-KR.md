@@ -1,7 +1,7 @@
 # 앵귤라 스타일 가이드
 
 ## 앵귤라 팀이 보증하는 가이드
-이 가이드를 리뷰하고 피드백을 주고 또한 작성하게끔 맡겨준 앵귤라 팀의 리더인 이고르 미나르에게 감사 드립니다.
+이 가이드를 리뷰하고 피드백을 주고 또한 작성하게끔 맡겨준 앵귤라 팀의 리더인 이고르 미나르(Igor Minar)에게 감사 드립니다.
 
 ## 목적
 *[@john_papa](//twitter.com/john_papa)가 제안하는 주관적인 앵귤라 스타일 가이드*
@@ -17,7 +17,7 @@
 ## 위대하고 자랑스런 커뮤니티
 절대로 아무것도 없는 무(無)에서부터 작업을 시작하지 마세요. 앵귤라 커뮤니티는 열정적이고 자신들의 경험을 공유하는 사람들로 가득한 아주 멋진 곳입니다. 그런 사람들 중에서 제 친구이자 앵귤라 전문가인 토드 모토(Todd Motto)와 저는 수많은 스타일과 관례들에 대해 같이 작업을 해 왔습니다.
 
-우리는 많은 부분에 대해 서로 동의하고, 어떤 부분들은 의견을 달리합니다. 그래서 저는 비교를 위해 꼭 [토드의 가이드라인](https://github.com/toddmotto/angularjs-styleguide)을 챙겨 보시길 바랍니다.
+우리는 많은 부분에 대해 서로 동의하고, 어떤 부분들은 의견을 달리합니다. 그래서 저는 비교를 위해 꼭 [토드의 가이드라인](https://github.com/toddmotto/angularjs-styleguide)을 챙겨 보는 것을 추천합니다.
 
 제가 제시하는 스타일의 많은 부분들은 [워드 벨(Ward Bell)](https://twitter.com/wardbell)과 제가 해왔던 많은 페어 프로그래밍 세션을 바탕으로 합니다. 제 친구인 워드는 이 가이드의 엄청난 발전에 확실히 지대한 영향을 주었습니다.
 
@@ -25,7 +25,7 @@
 이 가이드는 *무엇을 해야 하는지*, *왜 해야 하는지* 그리고 *어떻게 해야 하는지*에 대해 설명하고 있는데, 실무에서도 역시 도움이 될 겁니다. 이 가이드는 샘플 애플리케이션을 제공하고 있는데, 그 애플리케이션은 여기서 제공하는 스타일과 패턴을 따릅니다. [모듈라(`modular`)라고 이름을 붙인 샘플 애플리케이션](https://github.com/johnpapa/ng-demos)을 `modular` 폴더 안에서 확인할 수 있습니다. 클론을 뜨거나, 포크를 뜨거나 아니면 자유롭게 가져다 쓰셔도 됩니다. 앱을 실행하는 방법은 그 안의 	[`readme` 파일](https://github.com/johnpapa/ng-demos/tree/master/modular)을 참조하세요.
 
 ## 번역
-[앵귤라 스타일 가이드의 번역](https://github.com/johnpapa/angular-styleguide/tree/master/i18n)은 역시 마찬가지로 커뮤니티에 의해 진행되고 있습니다.
+[앵귤라 스타일 가이드의 번역](https://github.com/johnpapa/angular-styleguide/tree/master/i18n)은 역시 마찬가지로 커뮤니티에 의해 진행되고 있습니다. (역자주: 이하부터는 편의상 평어체로 작성합니다)
 
 ## 목차
 
@@ -67,12 +67,12 @@
 ### 1의 법칙
 ###### [Style [Y001](#style-y001)]
 
-  - Define 1 component per file.
+  - 파일 하나당 콤포넌트 하나만 정의할 것.
 
-  The following example defines the `app` module and its dependencies, defines a controller, and defines a factory all in the same file.
+  아래의 예제는 `app` 모듈과 그 디펜던시, 콘트롤러, 팩토리를 하나의 파일 안에서 모두 정의한다.
 
   ```javascript
-  /* avoid */
+  /* 비추 */
   angular
       .module('app', ['ngRoute'])
       .controller('SomeController', SomeController)
@@ -83,10 +83,10 @@
   function someFactory() { }
   ```
 
-  The same components are now separated into their own files.
+  같은 콤포넌트들은 이제 모두 각자의 파일로 분리해 냈다.
 
   ```javascript
-  /* recommended */
+  /* 강추 */
 
   // app.module.js
   angular
@@ -94,7 +94,7 @@
   ```
 
   ```javascript
-  /* recommended */
+  /* 강추 */
 
   // some.controller.js
   angular
@@ -105,7 +105,7 @@
   ```
 
   ```javascript
-  /* recommended */
+  /* 강추 */
 
   // someFactory.js
   angular
@@ -115,26 +115,26 @@
   function someFactory() { }
   ```
 
-**[Back to top](#table-of-contents)**
+**[목차](#table-of-contents)**
 
 ## IIFE
-### JavaScript Closures
+### 자바스크립트 클로저 (Closure)
 ###### [Style [Y010](#style-y010)]
 
-  - Wrap Angular components in an Immediately Invoked Function Expression (IIFE).
+  - 앵귤라 콤포넌트를 즉시실행함수표현식(Immediately Invoked Function Expression, IIFE)으로 감쌀 것.
 
-  *Why?*: An IIFE removes variables from the global scope. This helps prevent variables and function declarations from living longer than expected in the global scope, which also helps avoid variable collisions.
+  *Why?*: IIFE는 변수들을 전역(global) 스코프에서 제거한다. 이것은 전역 스코프 안에서 예상보다 오래 살아 남아있는 변수들이라든가 함수들 때문에 변수간 충돌이 생기는 상황을을 피하는 데 유용하다.
 
-  *Why?*: When your code is minified and bundled into a single file for deployment to a production server, you could have collisions of variables and many global variables. An IIFE protects you against both of these by providing variable scope for each file.
+  *Why?*: 실서버에 배포하는 과정에서 코드를 하나의 작은 파일로 압축할 때 지역 변수와 전역 변수들의 충돌이 생길 수 있다. IIFE는 이러한 상황을 각자의 파일 안에서 지역 변수화 시키기 때문에 안전하다.
 
   ```javascript
-  /* avoid */
+  /* 비추 */
   // logger.js
   angular
       .module('app')
       .factory('logger', logger);
 
-  // logger function is added as a global variable
+  // 전역 변수에 로깅 함수를 추가했다.
   function logger() { }
 
   // storage.js
@@ -142,15 +142,15 @@
       .module('app')
       .factory('storage', storage);
 
-  // storage function is added as a global variable
+  // 전역 변수에 저장 함수를 추가했다.
   function storage() { }
   ```
 
   ```javascript
   /**
-   * recommended
+   * 강추
    *
-   * no globals are left behind
+   * 전역 변수가 없음
    */
 
   // logger.js
@@ -176,15 +176,15 @@
   })();
   ```
 
-  - Note: For brevity only, the rest of the examples in this guide may omit the IIFE syntax.
+  - 참고: 코드 간결성을 위해 이 가이드의 나머지 예제 부분은 IIFE 설명에서 제외시켰다.
 
-  - Note: IIFE's prevent test code from reaching private members like regular expressions or helper functions which are often good to unit test directly on their own. However you can test these through accessible members or by exposing them through their own component. For example placing helper functions, regular expressions or constants in their own factory or constant.
+  - 참고: IIFE는 정규 표현식이라든가 헬퍼 함수들 같은 프라이빗 멤버들에 접근하는 것을 제한한다. 이것은 종종 단위 테스트를 할 때 문제가 생길 수도 있다. 하지만 이것은 접근 가능한 멤버들을 통한다거나 아니면 콤포넌트 자체에 접근 포인트를 만들어서 해결할 수 있다. 예를 들자면 팩토리 안에 헬퍼 함수, 상수, 정규 표현식들을 포함시켜 놓는다면 가능하다.
 
-**[Back to top](#table-of-contents)**
+**[목차](#table-of-contents)**
 
-## Modules
+## 모듈
 
-### Avoid Naming Collisions
+### 네이밍 충돌 회피
 ###### [Style [Y020](#style-y020)]
 
   - Use unique naming conventions with separators for sub-modules.

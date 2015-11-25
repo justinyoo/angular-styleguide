@@ -62,9 +62,9 @@
   1. [공헌 및 참여](#contributing)
   1. [라이센스](#license)
 
-## Single Responsibility
+## 단일 책임
 
-### Rule of 1
+### 1의 법칙
 ###### [Style [Y001](#style-y001)]
 
   - Define 1 component per file.

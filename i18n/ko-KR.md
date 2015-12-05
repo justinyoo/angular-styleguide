@@ -417,14 +417,14 @@
 ### 바인딩 멤버들의 상위 배치
 ###### [Style [Y033](#style-y033)]
 
-  - Place bindable members at the top of the controller, alphabetized, and not spread through the controller code.
+  - 바인딩해야 하는 멤버들은 콘트롤러의 최상단에, 알파벳 순으로 콘트롤러 코드 여기저기에 흩어져 있지 않도록 모아서 작성할 것.
 
-    *Why?*: Placing bindable members at the top makes it easy to read and helps you instantly identify which members of the controller can be bound and used in the View.
+    *Why?*: 바인딩 멤버들을 상단에 놓으면 코드를 읽기가 편해지고 콘트롤러의 어떤 멤버들이 뷰에서 바인딩이 가능한지 아닌지를 판단하기가 쉬워진다.
 
-    *Why?*: Setting anonymous functions in-line can be easy, but when those functions are more than 1 line of code they can reduce the readability. Defining the functions below the bindable members (the functions will be hoisted) moves the implementation details down, keeps the bindable members up top, and makes it easier to read.
+    *Why?*: 인라인 익명함수는 편리하지만 만약 한 줄을 넘어간다면 오히려 코드의 가독성을 떨어뜨린다. 따라서, 바인딩 멤버 아래에 이러한 함수들을 별도로 정의해서 좀 더 구체적으로 코드를 작성한다고 멤버와 연결시킨다면 훨씬 코드를 읽기가 수월해진다.
 
   ```javascript
-  /* avoid */
+  /* 비추 */
   function SessionsController() {
       var vm = this;
 
@@ -443,7 +443,7 @@
   ```
 
   ```javascript
-  /* recommended */
+  /* 강추 */
   function SessionsController() {
       var vm = this;
 
@@ -471,10 +471,10 @@
 
     ![Controller Using "Above the Fold"](https://raw.githubusercontent.com/johnpapa/angular-styleguide/master/assets/above-the-fold-1.png)
 
-  Note: If the function is a 1 liner consider keeping it right up top, as long as readability is not affected.
+  Note: 만약 함수가 한 줄 짜리라면 그냥 가독성을 해치지 않는 선에서 바인딩 멤버 안에 포함시켜도 된다.
 
   ```javascript
-  /* avoid */
+  /* 비추 */
   function SessionsController(data) {
       var vm = this;
 
@@ -495,7 +495,7 @@
   ```
 
   ```javascript
-  /* recommended */
+  /* 강추 */
   function SessionsController(sessionDataService) {
       var vm = this;
 

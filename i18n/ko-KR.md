@@ -117,7 +117,7 @@
 
 **[목차](#table-of-contents)**
 
-## IIFE
+## IIFE (즉시실행함수표현식)
 ### 자바스크립트 클로저 (Closure)
 ###### [Style [Y010](#style-y010)]
 
@@ -187,19 +187,19 @@
 ### 네이밍 충돌 회피
 ###### [Style [Y020](#style-y020)]
 
-  - Use unique naming conventions with separators for sub-modules.
+  - 서브모듈들을 위해 구분자를 포함해서 구분 가능한 네이밍 관례를 만들고 사용할 것.
 
-  *Why?*: Unique names help avoid module name collisions. Separators help define modules and their submodule hierarchy. For example `app` may be your root module while `app.dashboard` and `app.users` may be modules that are used as dependencies of `app`.
+  *Why?*: 구분 가능한 이름들은 모듈끼리 이름 때문에 충돌이 나는 것을 방지한다. 구분자는 모듈을 정의하는데 있어 서브모듈간 계층구조를 확립하는데 도움을 준다. 예를 들어 `app`을 최상위 모듈이라고 한다면 `app.dashboard`와 `app.users` 같은 모듈들은 `app` 모듈에 의존성을 가진 서브모듈로 볼 수 있게 된다.
 
-### Definitions (aka Setters)
+### 세터
 ###### [Style [Y021](#style-y021)]
 
-  - Declare modules without a variable using the setter syntax.
+  - 변수를 사용하는 대신 세터 문법을 사용해서 모듈을 정의할 것.
 
-  *Why?*: With 1 component per file, there is rarely a need to introduce a variable for the module.
+  *Why?*: 파일당 콤포넌트 하나라면, 모듈을 위해 변수를 사용할 일이 거의 없다.
 
   ```javascript
-  /* avoid */
+  /* 비추 */
   var app = angular.module('app', [
       'ngAnimate',
       'ngRoute',
@@ -208,10 +208,10 @@
   ]);
   ```
 
-  Instead use the simple setter syntax.
+  대신 간단한 세터 문법을 사용하도록 하자.
 
   ```javascript
-  /* recommended */
+  /* 강추 */
   angular
       .module('app', [
           'ngAnimate',
@@ -221,15 +221,15 @@
       ]);
   ```
 
-### Getters
+### 게터
 ###### [Style [Y022](#style-y022)]
 
-  - When using a module, avoid using a variable and instead use chaining with the getter syntax.
+  - 모듈을 사용할 때, 변수 사용을 지양하는 대신 메소드 체이닝을 이용해서 게터 문법을 사용할 것.
 
-  *Why?*: This produces more readable code and avoids variable collisions or leaks.
+  *Why?*: 이렇게 함으로써 좀 더 코드가 읽기 쉬워지고, 변수 충돌과 노출을 방지한다.
 
   ```javascript
-  /* avoid */
+  /* 비추 */
   var app = angular.module('app');
   app.controller('SomeController', SomeController);
 
@@ -237,7 +237,7 @@
   ```
 
   ```javascript
-  /* recommended */
+  /* 강추 */
   angular
       .module('app')
       .controller('SomeController', SomeController);
@@ -245,15 +245,15 @@
   function SomeController() { }
   ```
 
-### Setting vs Getting
+### 게터와 세터의 사용
 ###### [Style [Y023](#style-y023)]
 
-  - Only set once and get for all other instances.
+  - 세터는 한 번만 쓰고, 그 이외의 경우에는 게터만 쓸 것.
 
-  *Why?*: A module should only be created once, then retrieved from that point and after.
+  *Why?*: 모듈은 단 한 번만 만들어져야 하고 그 다음부터는 읽기만 해야 한다.
 
   ```javascript
-  /* recommended */
+  /* 강추 */
 
   // to set a module
   angular.module('app', []);
@@ -262,15 +262,15 @@
   angular.module('app');
   ```
 
-### Named vs Anonymous Functions
+### 기명함수와 익명함수
 ###### [Style [Y024](#style-y024)]
 
-  - Use named functions instead of passing an anonymous function in as a callback.
+  - 콜백 함수 사용시 익명함수를 전달하는 대신 기명함수를 사용할 것.
 
-  *Why?*: This produces more readable code, is much easier to debug, and reduces the amount of nested callback code.
+  *Why?*: 기명함수를 사용하면 코드가 좀 더 읽기 쉬워지고, 디버그하기도 쉽고, 중첩 콜백을 피할 수 있다.
 
   ```javascript
-  /* avoid */
+  /* 비추 */
   angular
       .module('app')
       .controller('DashboardController', function() { })
@@ -278,7 +278,7 @@
   ```
 
   ```javascript
-  /* recommended */
+  /* 강추 */
 
   // dashboard.js
   angular
@@ -297,43 +297,43 @@
   function logger() { }
   ```
 
-**[Back to top](#table-of-contents)**
+**[위로](#table-of-contents)**
 
-## Controllers
+## 콘트롤러
 
-### controllerAs View Syntax
+### controllerAs 뷰 문법
 ###### [Style [Y030](#style-y030)]
 
-  - Use the [`controllerAs`](http://www.johnpapa.net/do-you-like-your-angular-controllers-with-or-without-sugar/) syntax over the `classic controller with $scope` syntax.
+  - 기존의 `$scope`를 사용하는 콘트롤러 문법 대신 [`controllerAs`](http://www.johnpapa.net/do-you-like-your-angular-controllers-with-or-without-sugar/) 문법을 사용할 것.
 
-  *Why?*: Controllers are constructed, "newed" up, and provide a single new instance, and the `controllerAs` syntax is closer to that of a JavaScript constructor than the `classic $scope syntax`.
+  *Why?*: 콘트롤러가 새로 인스턴스를 만들 때 `controllerAs` 문법은 전통적인 `$scope` 문법보다는 조금 더 자바스크립트의 생성자에 가깝다.
 
-  *Why?*: It promotes the use of binding to a "dotted" object in the View (e.g. `customer.name` instead of `name`), which is more contextual, easier to read, and avoids any reference issues that may occur without "dotting".
+  *Why?*: 뷰 안에서 `name` 보다는 `customer.name`과 같은 점으로 연결된 객체 (dotted object)를 바인딩함으로써 조금 더 뷰의 맥락에 맞고, 읽기 쉽고, 또한 점으로 연결하지 않을 경우 발생할 수 있는 레퍼런스 이슈를 예방한다.
 
-  *Why?*: Helps avoid using `$parent` calls in Views with nested controllers.
+  *Why?*: 중첩된 콘트롤러와 뷰를 사용할 때 `$parent` 호출을 피한다.
 
   ```html
-  <!-- avoid -->
+  <!-- 비추 -->
   <div ng-controller="CustomerController">
       {{ name }}
   </div>
   ```
 
   ```html
-  <!-- recommended -->
+  <!-- 강추 -->
   <div ng-controller="CustomerController as customer">
       {{ customer.name }}
   </div>
   ```
 
-### controllerAs Controller Syntax
+### controllerAs 콘트롤러 문법
 ###### [Style [Y031](#style-y031)]
 
-  - Use the `controllerAs` syntax over the `classic controller with $scope` syntax.
+  - 기존의 `$scope`를 사용하는 콘트롤러 문법 대신 `controllerAs` 문법을 사용할 것.
 
-  - The `controllerAs` syntax uses `this` inside controllers which gets bound to `$scope`
+  - `controllerAs` 문법은 콘트롤러 안에서 `this`를 사용한다. `this`는 `$scope`에 바인딩 된다.
 
-  *Why?*: `controllerAs` is syntactic sugar over `$scope`. You can still bind to the View and still access `$scope` methods.
+  *Why?*: `controllerAs`는 `$scope`를 위한 문법적 꼼수이다. 따라서 여전히 뷰에서 `$scope`의 메소드들을 이용할 수 있다.
 
   *Why?*: Helps avoid the temptation of using `$scope` methods inside a controller when it may otherwise be better to avoid them or move the method to a factory, and reference them from the controller. Consider using `$scope` in a controller only when needed. For example when publishing and subscribing events using [`$emit`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$emit), [`$broadcast`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$broadcast), or [`$on`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$on).
 

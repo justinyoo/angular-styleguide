@@ -358,10 +358,10 @@
 
   - `controllerAs` 문법을 사용할 때 `this`를 별도의 뷰모델 ViewModel을 나타내는 `vm`이라는 일관적인 이름을 가진 변수로 할당해서 사용할 것.
 
-  *Why?*: The `this` keyword is contextual and when used within a function inside a controller may change its context. Capturing the context of `this` avoids encountering this problem.
+  *Why?*: `this` 키워드는 맥락에 따라 달라진다. 콘트롤러 안에서 펑션에 쓰일 경우 값이 달라질 수 있다. 따라서 `this` 의 맥락을 잡아 놓으면 이러한 문제를 피할 수 있다.
 
   ```javascript
-  /* avoid */
+  /* 비추 */
   function CustomerController() {
       this.name = {};
       this.sendMessage = function() { };
@@ -369,7 +369,7 @@
   ```
 
   ```javascript
-  /* recommended */
+  /* 강추 */
   function CustomerController() {
       var vm = this;
       vm.name = {};
@@ -377,14 +377,14 @@
   }
   ```
 
-  Note: You can avoid any [jshint](http://www.jshint.com/) warnings by placing the comment above the line of code. However it is not needed when the function is named using UpperCasing, as this convention means it is a constructor function, which is what a controller is in Angular.
+  Note: 이경우 코드 바로 위에 코멘트를 추가하면 [jshint](http://www.jshint.com/) 경고를 무시할 수 있다. 하지만 함수 이름이 UpperCasing 같은 형태라면 굳이 필요없는데 이는 앵귤라에서 콘트롤러의 생성자 함수와 같기 때문이다.
 
   ```javascript
   /* jshint validthis: true */
   var vm = this;
   ```
 
-  Note: When creating watches in a controller using `controller as`, you can watch the `vm.*` member using the following syntax. (Create watches with caution as they add more load to the digest cycle.)
+  Note: `controller as`를 사용해서 콘트롤러 안에서 관찰자를 생성할 경우, 아래와 같은 문법을 통해 `vm.*` 멤버들을 관찰할 수 있다. 관찰자를 생성하면 퍼포먼스에 영향을 줄 수 있으므로 사용에 주의가 필요하다.
 
   ```html
   <input ng-model="vm.title"/>
@@ -402,19 +402,19 @@
   }
   ```
 
-  Note: When working with larger codebases, using a more descriptive name can help ease cognitive overhead & searchability. Avoid overly verbose names that are cumbersome to type.
+  Note: 방대한 코드베이스에서 작업할 경우, 좀 더 구체적인 이름을 사용하면 직관적으로 이해하기가 쉬워진다. 하지만 너무 중언부언하는 식의 이름을 사용하게 되면 피곤해지니 조심하도록 하자.
 
   ```html
-  <!-- avoid -->
+  <!-- 비추 -->
   <input ng-model="customerProductItemVm.text">
   ```
 
   ```html
-  <!-- recommended -->
+  <!-- 강추 -->
   <input ng-model="productVm.id">
   ```
 
-### Bindable Members Up Top
+### 바인딩 멤버들의 상위 배치
 ###### [Style [Y033](#style-y033)]
 
   - Place bindable members at the top of the controller, alphabetized, and not spread through the controller code.

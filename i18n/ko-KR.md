@@ -297,7 +297,7 @@
   function logger() { }
   ```
 
-**[위로](#table-of-contents)**
+**[목차](#table-of-contents)**
 
 ## 콘트롤러
 
@@ -335,10 +335,10 @@
 
   *Why?*: `controllerAs`는 `$scope`를 위한 문법적 꼼수이다. 따라서 여전히 뷰에서 `$scope`의 메소드들을 이용할 수 있다.
 
-  *Why?*: Helps avoid the temptation of using `$scope` methods inside a controller when it may otherwise be better to avoid them or move the method to a factory, and reference them from the controller. Consider using `$scope` in a controller only when needed. For example when publishing and subscribing events using [`$emit`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$emit), [`$broadcast`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$broadcast), or [`$on`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$on).
+  *Why?*: 가능하다면 `$scope` 메소드들을 사용하지 않을 수 있거나 팩토리 레벨로 옮길 수 있을 때 콘트롤러 안에서 `$scope` 메소드들을 사용하려고 하는 유혹을 피하도록 도와주고 콘트롤러에서 참조할 수 있도록 도와준다. 콘트롤러 안에서 `$scope`를 사용하는 것은 필요한 경우에만 한해 사용한다. 예를 들자면 [`$emit`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$emit), [`$broadcast`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$broadcast), or [`$on`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$on) 같은 것들을 이용해서 이벤트를 등록하고 발행하는 경우들은 `$scope`를 직접 참조해야 한다.
 
   ```javascript
-  /* avoid */
+  /* 비추 */
   function CustomerController($scope) {
       $scope.name = {};
       $scope.sendMessage = function() { };
@@ -346,7 +346,7 @@
   ```
 
   ```javascript
-  /* recommended - but see next section */
+  /* 강추 &ndash; 하지만 다음 섹션을 볼 것 */
   function CustomerController() {
       this.name = {};
       this.sendMessage = function() { };

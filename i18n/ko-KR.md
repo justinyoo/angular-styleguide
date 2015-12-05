@@ -353,10 +353,10 @@
   }
   ```
 
-### controllerAs with vm
+### controllerAs과 vm
 ###### [Style [Y032](#style-y032)]
 
-  - Use a capture variable for `this` when using the `controllerAs` syntax. Choose a consistent variable name such as `vm`, which stands for ViewModel.
+  - `controllerAs` 문법을 사용할 때 `this`를 별도의 뷰모델 ViewModel을 나타내는 `vm`이라는 일관적인 이름을 가진 변수로 할당해서 사용할 것.
 
   *Why?*: The `this` keyword is contextual and when used within a function inside a controller may change its context. Capturing the context of `this` avoids encountering this problem.
 
